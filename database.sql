@@ -8,12 +8,14 @@ CREATE TABLE `user` (
 
 CREATE TABLE `tag` (
   `tag_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL
+  `name` VARCHAR(50) NOT NULL,
+  popularity_points INT NULL
 );
 
 CREATE TABLE `user_tag` (
   `user_id` INT,
   `tag_id` INT,
+  `tag_priority` INT,
   PRIMARY KEY (`user_id`, `tag_id`)
 );
 
