@@ -1,4 +1,4 @@
-w<?php
+<?php
 require_once('C:/xampp/htdocs/R_blog/dbConnection.php');
 
 $sql = "SELECT *

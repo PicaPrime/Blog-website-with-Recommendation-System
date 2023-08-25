@@ -15,9 +15,10 @@ CREATE TABLE `tag` (
 CREATE TABLE `user_tag` (
   `user_id` INT,
   `tag_id` INT,
-  `tag_priority` INT,
+  `tag_priority` INT DEFAULT 0, -- Set default value to 0
   PRIMARY KEY (`user_id`, `tag_id`)
 );
+
 
 CREATE TABLE `admin` (
   `admin_id` INT PRIMARY KEY AUTO_INCREMENT,
