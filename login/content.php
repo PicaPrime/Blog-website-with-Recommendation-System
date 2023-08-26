@@ -32,29 +32,33 @@
             $row = $result->fetch_assoc();
             echo '<h1>' . $row["title"] . '</h1>';
             echo '<p>' . $row["body"] . '</p>';
-        } else {
-            echo "Content not found.";
-        }
-
+        } 
 
         if (isset($_COOKIE["user_id"])) {
             $stored_user_id = $_COOKIE["user_id"];
+            echo $stored_user_id;
 
-            $sql = "select * from user_tag where user_id = $stored_user_id;";
+            $sql = "select * from user_tag where user_id = '$stored_user_id' and tag_id = '$content_id';";
             $result = $connection->query($sql);
+            while($row = $result->fetch_assoc()) {
+                echo "id: " . $row["user_id"]. " - Name: " . $row["tag_id"]. " " . $row["tag_priority"]. "<br>";
+              }
 
             if ($result->num_rows == 0) {
-                $sql = "INSERT INTO `user_tag` (`user_id`, `tag_id`) VALUES ($stored_user_id, $content_id);";
-                $sql = "select * from user_tag where user_id = $stored_user_id;";
+                $sql = "INSERT INTO `user_tag` (`user_id`, `tag_id`, `tag_priority`) VALUES ($stored_user_id, $content_id, 1);";
                 $result = $connection->query($sql);
-                $row = $result->fetch_assoc();
-                $row["tag_priority"]++;
-                
             }
             else if ($result->num_rows > 0) {
                 // output data of each row
-                $row = $result->fetch_assoc();
-                $row["tag_priority"]++;
+                $newPriority = 0;
+                while($row = $result->fetch_assoc()) {
+                    $newPriority = $row["tag_priority"];
+                    $newPriority =$newPriority + 1;
+                }
+                
+                $sql = "INSERT INTO `user_tag` (`tag_priority`) VALUES ($newPriority) where user_id = '$stored_user_id' and tag_id = '$content_id';";
+                $result = $connection->query($sql);
+                echo "successfull";
             } else {
                 echo "0 results";
             }
