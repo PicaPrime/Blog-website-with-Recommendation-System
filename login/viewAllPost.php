@@ -2,9 +2,7 @@
 require_once('C:/xampp/htdocs/R_blog/dbConnection.php');
 
 $sql = "SELECT *
-    FROM content
-    NATURAL JOIN content_tag
-    NATURAL JOIN tag";
+    FROM content";
     
 $result = $connection->query($sql);
 
