@@ -34,6 +34,23 @@
         if ($tagList->num_rows > 0) {
             while($row = $tagList->fetch_assoc()) {
                 $tagArr[] = $row['tag_id'];
+
+
+                //working 
+                $t = $row['tag_id'];
+                $tag_query = "select * from tag where tag_id = $t";
+                $r = $connection->query($tag_query);
+                $r = $r->fetch_assoc();
+                $p = $r['popularity_points'];
+                $p = $p+1;
+                $tag_priority_query = "UPDATE tag
+                SET popularity_points = $p -- Set the new value for popularity_points
+                WHERE tag_id = $t; -- Specify the tag_id to identify the record
+                ";
+                $connection->query($tag_priority_query);
+
+
+                
             }
              
         }          
