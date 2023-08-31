@@ -9,13 +9,13 @@ CREATE TABLE `user` (
 CREATE TABLE `tag` (
   `tag_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
-  popularity_points INT NULL
+  popularity_points INT DEFAULT 0
 );
 
 CREATE TABLE `user_tag` (
   `user_id` INT,
   `tag_id` INT,
-  `tag_priority` INT DEFAULT 0, -- Set default value to 0
+  `tag_priority` INT DEFAULT 0,
   PRIMARY KEY (`user_id`, `tag_id`)
 );
 
@@ -80,13 +80,7 @@ VALUES
   ('Travel');
 
 -- Inserting data into the 'user_tag' table
-INSERT INTO `user_tag` (`user_id`, `tag_id`)
-VALUES
-  (1, 1),
-  (1, 3),
-  (2, 2),
-  (3, 4),
-  (3, 1);
+-- not inserting in user_tag
 
 -- Inserting data into the 'admin' table
 INSERT INTO `admin` (`admin_username`, `admin_password`)
