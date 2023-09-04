@@ -47,4 +47,6 @@ if ($result->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
+
+echo "<a href='viewAllPost.php'>view all post</a>";
 ?>

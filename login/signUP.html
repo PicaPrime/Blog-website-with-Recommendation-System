@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User Registration</title>
 </head>
+
 <body>
     <h1>User Registration</h1>
-    <form action="userSignUP.php" method="POST">
-        <label for="user_name">User Name:</label>
+    <form action="userSignUP.php" method="post">
+        <label for="user_name">Username:</label>
         <input type="text" name="user_name" required><br>
 
         <label for="user_password">Password:</label>
@@ -16,18 +18,43 @@
         <input type="email" name="email" required><br>
 
         <label for="dob">Date of Birth:</label>
-        <input type="date" name="dob" required><br>
-
-        <!-- <label for="age">Age:</label>
-        <input type="number" name="age" min="0" required><br> -->
-
-        <!-- <label for="ageRestriction">Age Restriction:</label>
-        <input type="number" name="ageRestriction" min="0" max="1" required><br> -->
+        <input type="date" name="dob"><br>
 
         <label for="country">Country:</label>
-        <input type="text" name="country"><br>
+        <select name="country">
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Spain">Spain</option>
+            <option value="Italy">Italy</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="South Korea">South Korea</option>
+            <option value="China">China</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Russia">Russia</option>
+            <option value="South Africa">South Africa</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Bangladesh">Bangladesh</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Sri Lanka">Sri Lanka</option>
+            <option value="Nepal">Nepal</option>
+            <option value="Bhutan">Bhutan</option>
+            <option value="Maldives">Maldives</option>
+            <!-- Add more countries as needed -->
 
-        <input type="submit" value="Register">
+        </select><br>
+
+        <input type="submit" name="register" value="Register">
     </form>
 </body>
+
 </html>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie($cookie_name, $cookie_value, $cookie_expiration, $cookie_path);
 
         echo "Cookie 'user_id' is set with value $user_id";
-        header("Location: viewAllPost.php");
+        header("Location: signUpContent.php");
     } else {
         // User not found, show error message
         echo "Invalid username or password.";

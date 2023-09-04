@@ -1,12 +1,7 @@
 <?php
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate and sanitize user inputs (as shown in the previous answer)
 
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validate user_name using regex (letters and numbers only)
         $user_name = $_POST["user_name"];
         if (!preg_match("/^[a-zA-Z0-9]{1,50}$/", $user_name)) {
@@ -40,28 +35,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $age = $today->diff($birthdate)->y; // Calculate the difference in years
 
         // Validate ageRestriction (0 or 1)
-        $ageRestriction = 0;
+        $ageRestriction = 1;
         if($age > 18){
-            $ageRestriction = 1;
+            $ageRestriction = 0;
         }
-        
 
+    
         // Validate country (optional, letters and spaces only)
-        $country = $_POST["country"];
-        if (!empty($country) && !preg_match("/^[a-zA-Z\s]{1,20}$/", $country)) {
-            die("Invalid country name. It should contain letters and spaces only (up to 20 characters).");
-        }
+        $selectedCountry = $_POST['country'];
 
-        // If all data is valid, you can insert it into the database or perform other actions here.
-        // Replace this section with your database insertion code.
+        $country = $selectedCountry;
 
-        echo "provided data is valid". "<br>";
-    }
-
-
-
-
-    // Database connection information (modify as needed)
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -87,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Bind the parameters
-    $stmt->bind_param("ssssiii", $user_name, $user_password, $email, $dob, $age, $ageRestriction, $country);
+    $stmt->bind_param("ssssiis", $user_name, $user_password, $email, $dob, $age, $ageRestriction, $country);
 
     // Execute the statement
     if ($stmt->execute()) {
