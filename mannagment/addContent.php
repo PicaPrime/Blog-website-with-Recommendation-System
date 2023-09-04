@@ -1,23 +1,11 @@
 <?php
-// Replace these variables with your database connection details
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "blog";
 
-// Create a database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once('dbConnection.php');
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Initialize variables
 $title = $author = $content_date = $sub_title = $body = $tag_ids = [];
+$tag_name = '';
 
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_content"])) {
     $title = $_POST["title"];
     $author = $_POST["author"];
     $content_date = $_POST["content_date"];
@@ -25,26 +13,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $body = $_POST["body"];
     $tag_ids = $_POST["tag_ids"];
 
-    // Insert content into the database
     $insert_content_sql = "INSERT INTO content (title, author, content_date, sub_title, body)
                           VALUES ('$title', '$author', '$content_date', '$sub_title', '$body')";
     $conn->query($insert_content_sql);
 
-    // Get the last inserted content ID
     $content_id = $conn->insert_id;
 
-    // Insert content tags into the content_tag table
     foreach ($tag_ids as $tag_id) {
         $insert_content_tag_sql = "INSERT INTO content_tag (content_id, tag_id) VALUES ($content_id, $tag_id)";
         $conn->query($insert_content_tag_sql);
     }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_tag"])) {
+    $tag_name = $_POST["tag_name"];
+
+    $regex = "/^[a-zA-Z0-9_-]{1,255}$/";
+    if (!preg_match($regex, $tag_name)) {
+        echo "Invalid tag name. Tag name must be alphanumeric and between 1 and 255 characters long.";
+        return;
+    }
+
+    $insert_tag_sql = "INSERT INTO tag (name) VALUES ('$tag_name')";
+    $conn->query($insert_tag_sql);
+
+    echo "Tag '$tag_name' added successfully!";
 }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Content</title>
+    <title>Add Content and Tag</title>
 </head>
 <body>
     <h2>Add Content</h2>
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <textarea name="body" rows="4" required></textarea><br>
         <label for="tag_ids">Select Tags:</label><br>
         <?php
-        // Fetch tag data from the database
+
         $tag_sql = "SELECT tag_id, name FROM tag";
         $tag_result = $conn->query($tag_sql);
 
@@ -70,12 +70,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         ?>
         <br>
-        <input type="submit" value="Add Content">
+        <input type="submit" name="add_content" value="Add Content">
+    </form>
+
+    <h2>Add Tag</h2>
+    <form method="post">
+        <label for="tag_name">Tag Name:</label><br>
+        <input type="text" name="tag_name" required><br>
+        <br>
+        <input type="submit" name="add_tag" value="Add Tag">
     </form>
 </body>
 </html>
 
 <?php
-// Close the database connection
+
 $conn->close();
 ?>
