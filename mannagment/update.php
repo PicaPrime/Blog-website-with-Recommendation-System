@@ -75,50 +75,106 @@ if (isset($_POST['update_content'])) {
 <html>
 <head>
     <title>Update Content</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select,
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        hr {
+            border-top: 2px solid #ccc;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Add more custom styles here as needed */
+    </style>
 </head>
 <body>
-    <h1>Update Content</h1>
-    <form method="post">
-        <label for="select_title">Select Content Title:</label>
-        <select name="select_title">
-            <?php
-            // Retrieve a list of content titles
-            $sql = "SELECT `content_id`, `title` FROM `content`";
-            $result = $mysqli->query($sql);
+    <div class="container">
+        <h1>Update Content</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="select_title">Select Content Title:</label>
+                <select name="select_title" class="form-control">
+                    <?php
+                    // Retrieve a list of content titles
+                    $sql = "SELECT `content_id`, `title` FROM `content`";
+                    $result = $mysqli->query($sql);
 
-            while ($row = $result->fetch_assoc()) {
-                $selected = ($row['content_id'] == $content_id) ? 'selected' : '';
-                echo "<option value='{$row['content_id']}' $selected>{$row['title']}</option>";
-            }
-            ?>
-        </select>
-        <input type="submit" value="Select">
-    </form>
+                    while ($row = $result->fetch_assoc()) {
+                        $selected = ($row['content_id'] == $content_id) ? 'selected' : '';
+                        echo "<option value='{$row['content_id']}' $selected>{$row['title']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <input type="submit" value="Select" class="btn btn-primary">
+        </form>
 
-    <hr>
+        <hr>
 
-    <form method="post">
-        <input type="hidden" name="content_id" value="<?php echo $content_id; ?>">
-        <label for="title">Title:</label>
-        <input type="text" name="title" value="<?php echo $title; ?>" required><br>
+        <form method="post">
+            <input type="hidden" name="content_id" value="<?php echo $content_id; ?>">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" value="<?php echo $title; ?>" class="form-control" required>
+            </div>
 
-        <label for="author">Author:</label>
-        <input type="text" name="author" value="<?php echo $author; ?>" required><br>
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" name="author" value="<?php echo $author; ?>" class="form-control" required>
+            </div>
 
-        <label for="content_date">Content Date:</label>
-        <input type="date" name="content_date" value="<?php echo $content_date; ?>"><br>
+            <div class="form-group">
+                <label for="content_date">Content Date:</label>
+                <input type="date" name="content_date" value="<?php echo $content_date; ?>" class="form-control">
+            </div>
 
-        <label for="sub_title">Sub Title:</label>
-        <input type="text" name="sub_title" value="<?php echo $sub_title; ?>"><br>
+            <div class="form-group">
+                <label for="sub_title">Sub Title:</label>
+                <input type="text" name="sub_title" value="<?php echo $sub_title; ?>" class="form-control">
+            </div>
 
-        <label for="adult_tag">Adult Tag:</label>
-        <input type="number" name="adult_tag" value="<?php echo $adult_tag; ?>"><br>
+            <div class="form-group">
+                <label for="adult_tag">Adult Tag:</label>
+                <input type="number" name="adult_tag" value="<?php echo $adult_tag; ?>" class="form-control">
+            </div>
 
-        <label for="body">Body:</label>
-        <textarea name="body" rows="4" cols="50" required><?php echo $body; ?></textarea><br>
+            <div class="form-group">
+                <label for="body">Body:</label>
+                <textarea name="body" rows="4" cols="50" class="form-control" required><?php echo $body; ?></textarea>
+            </div>
 
-        <input type="submit" name="update_content" value="Update Content">
-    </form>
+            <input type="submit" name="update_content" value="Update Content" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js scripts at the end of the body -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
 </body>
 </html>
 
