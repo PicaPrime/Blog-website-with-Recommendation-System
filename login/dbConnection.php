@@ -6,11 +6,11 @@ $password = ""; // Change this to your database password
 $database = "blog"; // Change this to your database name
 
 // Create a connection
-$connection = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($host, $username, $password, $database);
 
 // Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
