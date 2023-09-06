@@ -40,24 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ageRestriction = 0;
         }
 
-    
-        // Validate country (optional, letters and spaces only)
         $selectedCountry = $_POST['country'];
 
         $country = $selectedCountry;
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "blog";
-
-    // Create a database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check for connection errors
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+require_once('dbConnection.php');
 
     // Insert user registration data into the 'user' table
     $sql = "INSERT INTO user (user_name, user_password, email, dob, age, ageRestriction, country)
@@ -88,5 +75,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 }
-
-?>

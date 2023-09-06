@@ -10,19 +10,7 @@ if (isset($_COOKIE["user_age"])) {
     }
 }
 
-// Database connection configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "blog";
-
-// Create a database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once('dbConnection.php');
 
 // Query to fetch the most rated content titles (excluding age-restricted content if needed)
 if ($showAgeRestrictedContent) {
@@ -33,7 +21,6 @@ if ($showAgeRestrictedContent) {
 
 $result = $conn->query($sql);
 
-// Display the content titles
 if ($result->num_rows > 0) {
     echo "<h1>Most Rated Content Titles</h1>";
     echo "<ul>";
