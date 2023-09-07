@@ -34,30 +34,38 @@ if (!$result) {
     echo "    <meta charset='UTF-8'>";
     echo "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>";
     echo "    <title>View Content</title>";
+    
+    // Include Bootstrap 5 CSS stylesheet
+    echo "    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'>";
+    
     echo "</head>";
-    echo "<body>";
+    echo "<body class='container mt-4''>";
     echo "    <h2>View Content</h2>";
-    echo "    <table border='1'>";
-    echo "        <tr>";
-    echo "            <th>Title</th>";
-    echo "            <th>Author</th>";
-    echo "            <th>Content Date</th>";
-    echo "            <th>Tags</th>";
-    echo "            <th>Average Rating</th>";
-    echo "            <th>Comment Count</th>";
-    echo "        </tr>";
+    echo "    <table class='table table-bordered'>";
+    echo "        <thead>";
+    echo "            <tr>";
+    echo "                <th>Title</th>";
+    echo "                <th>Author</th>";
+    echo "                <th>Content Date</th>";
+    echo "                <th>Tags</th>";
+    echo "                <th>Average Rating</th>";
+    echo "                <th>Comment Count</th>";
+    echo "            </tr>";
+    echo "        </thead>";
+    echo "        <tbody>";
     
     while ($row = $result->fetch_assoc()) {
-        echo "        <tr>";
-        echo "            <td>" . $row["title"] . "</td>";
-        echo "            <td>" . $row["author"] . "</td>";
-        echo "            <td>" . $row["content_date"] . "</td>";
-        echo "            <td>" . $row["tags"] . "</td>";
-        echo "            <td>" . round($row["average_rating"], 2) . "</td>";
-        echo "            <td>" . $row["comment_count"] . "</td>";
-        echo "        </tr>";
+        echo "            <tr>";
+        echo "                <td>" . $row["title"] . "</td>";
+        echo "                <td>" . $row["author"] . "</td>";
+        echo "                <td>" . $row["content_date"] . "</td>";
+        echo "                <td>" . $row["tags"] . "</td>";
+        echo "                <td>" . round($row["average_rating"], 2) . "</td>";
+        echo "                <td>" . $row["comment_count"] . "</td>";
+        echo "            </tr>";
     }
     
+    echo "        </tbody>";
     echo "    </table>";
     echo "</body>";
     echo "</html>";
