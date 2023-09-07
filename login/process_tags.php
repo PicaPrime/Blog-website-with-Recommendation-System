@@ -1,7 +1,6 @@
 <?php
-// Check if the form was submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Establish a database connection (replace with your database credentials)
     $db_host = 'localhost';
     $db_username = 'root';
     $db_password = '';
@@ -14,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Get the selected tags from the form
-    $user_id = 1; // Replace with the actual user ID
+    $user_id = $_COOKIE['user_id']; // Replace with the actual user ID
     $tag_priority = 1; // Set the tag priority to 1
 
     if (isset($_POST['tags'])) {

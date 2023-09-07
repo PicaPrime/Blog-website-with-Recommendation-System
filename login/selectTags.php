@@ -7,6 +7,7 @@
     <h1>Select Tags for User</h1>
 
     <?php
+    
     // Establish a database connection (replace with your database credentials)
     $db_host = 'localhost';
     $db_username = 'root';
@@ -34,6 +35,8 @@
         echo "No tags selected.";
     }
     $conn->close();
+
+   
     ?>
 
 </body>
