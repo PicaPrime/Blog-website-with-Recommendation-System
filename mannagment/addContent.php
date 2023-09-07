@@ -36,12 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_content"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_tag"])) {
     $tag_name = $_POST["tag_name"];
 
-    $regex = "/^[a-zA-Z0-9_-]{1,255}$/";
-    if (!preg_match($regex, $tag_name)) {
-        echo "Invalid tag name. Tag name must be alphanumeric and between 1 and 255 characters long.";
-        return;
-    }
-
     $insert_tag_sql = "INSERT INTO tag (name) VALUES ('$tag_name')";
     $conn->query($insert_tag_sql);
 
@@ -102,6 +96,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_tag"])) {
     </style>
 </head>
 <body class="container mt-4">
+
+<h2>Add Tag</h2>
+    <form method="post" class="form-label">
+        <div class="mb-3">
+            <label for="tag_name" class="form-label">Tag Name:</label>
+            <input type="text" name="tag_name" class="form-control" required>
+        </div>
+        <input type="submit" name="add_tag" value="Add Tag" class="btn btn-primary">
+    </form><br>
     <h2>Add Content</h2>
     <form method="post" class="form-label">
         <div class="mb-3">
@@ -149,14 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_tag"])) {
         <input type="submit" name="add_content" value="Add Content" class="btn btn-primary">
     </form>
 
-    <h2>Add Tag</h2>
-    <form method="post" class="form-label">
-        <div class="mb-3">
-            <label for="tag_name" class="form-label">Tag Name:</label>
-            <input type="text" name="tag_name" class="form-control" required>
-        </div>
-        <input type="submit" name="add_tag" value="Add Tag" class="btn btn-primary">
-    </form>
+    
 
     <!-- Add Bootstrap JS and Popper.js scripts at the end of the body -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
