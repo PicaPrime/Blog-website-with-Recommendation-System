@@ -50,7 +50,6 @@
     `rating_id` INT PRIMARY KEY AUTO_INCREMENT,
     `content_id` INT,
     `AverageRating` FLOAT(10),
-    `rating_date` TIMESTAMP,
     FOREIGN KEY (`content_id`) REFERENCES `content` (`content_id`)
   );
 

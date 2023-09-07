@@ -134,3 +134,17 @@ INSERT INTO `content_tag` (`content_id`, `tag_id`) VALUES
 (8, 19),
 (8, 20),
 (8, 32);
+
+
+insert into content_rating (content_id,	AverageRating) VALUES (1, 5.4),
+(2, 8),
+(3, 8.3),
+(4,4),
+(5,9),
+(6, 5),
+(7, 8.9),
+(8, 2),
+(17, 4),
+(18, 5.5),
+(19, 3),
+(21, 4);
