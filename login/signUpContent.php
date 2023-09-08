@@ -41,9 +41,9 @@
     require_once('dbConnection.php');
 
     if ($showAgeRestrictedContent) {
-        $sql = "SELECT * FROM content natural join content_rating ORDER BY AverageRating DESC LIMIT 10";
+        $sql = "SELECT * FROM content natural join content_rating ORDER BY AverageRating DESC LIMIT 5";
     } else {
-        $sql = "SELECT * FROM content natural join content_rating WHERE adult_tag = 0 ORDER BY AverageRating DESC LIMIT 10";
+        $sql = "SELECT * FROM content natural join content_rating WHERE adult_tag = 0 ORDER BY AverageRating DESC LIMIT 5";
     }
 
     $result = $conn->query($sql);
@@ -81,9 +81,22 @@
     }
 
     if ($showAgeRestrictedContent) {
-        $sql = "SELECT * FROM content natural join tag ORDER BY popularity_points DESC LIMIT 5";
+        $sql = "SELECT * FROM content natural join content_tag natural join tag ORDER BY tag.popularity_points DESC LIMIT 5";
+        $sql = "SELECT DISTINCT c.content_id, c.title
+        FROM content c
+        JOIN content_tag ct ON c.content_id = ct.content_id
+        JOIN tag t ON ct.tag_id = t.tag_id 
+        ORDER by popularity_points 
+        DESC LIMIT 5;";
     } else {
-        $sql = "SELECT * FROM content natural join tag where adult_tag = 0 ORDER BY popularity_points DESC LIMIT 5";
+        $sql = "SELECT * FROM content natural join content_tag natural join tag where adult_tag = 0 ORDER BY tag.popularity_points DESC LIMIT 5";
+        $sql = "SELECT DISTINCT c.content_id, c.title
+        FROM content c
+        JOIN content_tag ct ON c.content_id = ct.content_id
+        JOIN tag t ON ct.tag_id = t.tag_id 
+        where adult_tag = 0
+        ORDER by popularity_points 
+        DESC LIMIT 5;";
     }
 
     $result = $conn->query($sql);
